@@ -3,13 +3,15 @@ import SearchBar from './components/SearchBar';
 import StatusFilter from './components/StatusFilter';
 import TaskTable from './components/TaskTable';
 import { useTasks } from './hooks/useTasks';
+import { useDebounce } from './hooks/useDebounce';
 
 export default function App() {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('');
   const [page, setPage] = useState(1);
 
-  const { tasks, total, loading, error } = useTasks(query, status, page, 10);
+  const debouncedQuery = useDebounce(query, 300);
+  const { tasks, total, loading, error } = useTasks(debouncedQuery, status, page, 10);
 
   const totalPages = Math.ceil(total / 10);
 
