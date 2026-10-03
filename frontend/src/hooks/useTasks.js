@@ -10,6 +10,7 @@ export function useTasks(query, status, page, pageSize) {
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
+    setError(null);                              // CHANGE 1: new line
 
     fetchTasks({ query, status, page, pageSize }, controller.signal)
       .then((data) => {
@@ -18,8 +19,9 @@ export function useTasks(query, status, page, pageSize) {
         setLoading(false);
       })
       .catch((err) => {
-        if (err.name === 'AbortError') return;
+        if (err.name === 'AbortError') return;   // keep this line as it is
         setError(err.message);
+        setLoading(false);                       // CHANGE 2: new line
       });
 
     return () => controller.abort();
