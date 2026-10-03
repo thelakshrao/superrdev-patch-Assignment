@@ -9,7 +9,7 @@
 6. **Backend:** bad `status`, `page` or `pageSize` now returns 400 instead of 500. `pageSize` is capped at 100.
 7. **Backend:** paging now happens in the database (LIMIT/OFFSET plus COUNT), not in Java memory. API output is identical (checked with diff).
 
-My handwritten explanations are in the `handwritten/` folder.
+My handwritten explanations are in `handwritten/`. A detailed write-up with screenshots is in `Working_Notes.pdf`.
 
 ## What I chose not to change
 - The `LIKE '%term%'` search still scans the table. An index would not help it.
